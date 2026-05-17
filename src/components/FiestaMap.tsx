@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { Fiesta } from "@/types/fiesta";
@@ -26,6 +26,13 @@ interface Props {
 }
 
 export function FiestaMap({ fiestas, focused }: Props) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return (
+      <div className="rounded-3xl overflow-hidden border border-border bg-muted h-[560px] animate-pulse" />
+    );
+  }
   return (
     <div className="rounded-3xl overflow-hidden border border-border shadow-[var(--shadow-card)] bg-card">
       <MapContainer
