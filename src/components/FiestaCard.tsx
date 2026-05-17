@@ -1,5 +1,5 @@
 import type { Fiesta } from "@/types/fiesta";
-import { formatFiestaDate } from "@/lib/format";
+import { getFiestaDate } from "@/lib/format";
 import { Calendar, MapPin, Church } from "lucide-react";
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 }
 
 export function FiestaCard({ fiesta, onView }: Props) {
+  const { label } = getFiestaDate(fiesta);
   return (
     <article className="group flex flex-col rounded-3xl bg-card border border-border overflow-hidden shadow-[var(--shadow-card)] hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
@@ -28,7 +29,7 @@ export function FiestaCard({ fiesta, onView }: Props) {
         <div className="mt-3 space-y-1.5 text-sm text-muted-foreground">
           <p className="flex items-center gap-2">
             <Calendar className="h-3.5 w-3.5 text-primary" />
-            {formatFiestaDate(fiesta.date)}
+            {label}
           </p>
           <p className="flex items-center gap-2">
             <Church className="h-3.5 w-3.5 text-primary" />
